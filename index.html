@@ -1,0 +1,91 @@
+
+
+<cbc:ScriptTag ID="underscore" runat="server" Src="~/polls/js/underscore.min.js" /> 
+<cbc:ScriptTag ID="songquest" runat="server" Src="~/polls/js/songquest.js" /> 
+<cbc:StyleTag ID="StyleTag1" runat="server" Src="~/polls/css/songquest.css"  />   
+
+
+<div style="background-color: white; padding: 10px; padding-top: 25px; clear: both">
+    <div class="votingContent">
+        <div id="pollTitle">Ontario</div>
+        <span id="pollLoading" class="pollLoading"></span>
+        <ul id="pollSortBy">
+            <li><a href="#" class="pollSortByRandom selected" data-sort-id="1" title="Sort by most recent">Random</a></li>
+            <li><a href="#" class="pollSortByRecent" data-sort-id="2" title="Sort randomly">Recent</a></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="pollSearchHeader">
+            <input type="text" id="pollSearch" placeholder="Search this region (e.g. artist, song)" />
+            <span id="pollPlayAllBtn"><a class="playButton" href="" title="Play all"></a></span>
+        </div>
+        <div id="pollNavigation" class="pollNavigation">
+            <div class="pages" id="pollPagination"></div>
+            <div class="prevNextButtons" id="pollPrevNextButtons"></div>
+            <div class="clear"></div>
+        </div>
+	    <div id="resultsPanel"></div>
+    </div>
+</div>
+
+<!-- start templates -->
+<script id="pollNoResultsTemplate" type="text/template">
+	<p class="pollMessage">Sorry, there are no results with that search criteria.</p>    
+</script>
+
+<script id="pollHasResultsTemplate" type="text/template">
+	<ul class="votingItems gearsblock artistTrackPoll"><@=rows@></ul>	
+</script>
+
+<script id="pollResultRowTemplate" type="text/template">
+	<@ _.each(results, function(row) { @>
+	<li class="item dynamicPlaySection dynamicShareSection">
+		<input type="hidden" class="questionItemId" value="<@=row.Id@>" />
+		<div class="left">
+			<div class="questionImg">
+				<span class="questionHeader"></span>
+				<img src="http://static.music.cbc.ca<@=row.BandImage@>" alt="<@=row.BandName@>" />
+				<img src="http://static.music.cbc.ca<@=row.BandImage@>" style="display:none" class="shareImage" />
+			</div>
+			<div class="questionText">
+				<@=row.Title@>
+				<span><a href="<@=row.BandPermalink@>"><@=row.BandName@></a></span>
+			</div>
+		</div>
+		<div class="right">
+			<div class="voteSelect">
+				<input type="radio" name="question_<@=row.PollQuestionId@>" value="<@=row.Id@>" />
+				<button class="voteButton" type="button">Vote</button>
+			</div>
+			<a class="playButton" href="<@=row.PlayPermalink@>" title="Play this track"><@=row.BandName@> - <@=row.Title@></a>
+			<a class="gearsButton noinfo" href="<@=row.PlayPermalink@>" title="share"><@=row.PlayPermalink@></a>
+		</div>
+		<div class="clear"></div>
+	</li>
+	<@ }); @>
+</script>
+
+<script id="pollPaginationTemplate" type="text/template">
+    <@ _.each(pages, function(pageNum) { @>
+        <@ if (pageNum == currPage) { @>
+            <span><@=pageNum@></span>
+        <@ } else { @>
+            <a href="#" title="page <@=pageNum@>"><@=pageNum@></a>
+        <@ } @>
+    <@ }); @>
+    <@ if (showMorePages) { @><span>...</span><@ } @>
+</script>
+    
+<script id="pollPrevNextTemplate" type="text/template">
+    <@ if (showPrevLink) { @>
+        <a href="#" class="pollPagePrev" title="Previous page">prev</a>
+    <@ } else { @>
+        <span>prev</span>
+    <@ } @>
+    <span>|</span>
+    <@ if (showNextLink) { @>
+        <a href="#" class="pollPageNext" title="Next page">next</a>
+    <@ } else { @>
+        <span>next</span>
+    <@ } @>
+</script>
+<!-- end templates -->
