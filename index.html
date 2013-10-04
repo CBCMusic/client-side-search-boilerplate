@@ -5,15 +5,18 @@
 	<script type="text/javascript" src="libs/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="libs/underscore.min.js"></script>
 	<script type="text/javascript" src="libs/search.js"></script>
+
+	<link href="css/search.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
-	<div id="pollTitle">Ontario</div>
-	<span id="pollLoading" class="pollLoading"></span>
+	<h1>client-side-search demo</h1>
+
 	<ul id="pollSortBy">
 		<li><a href="#" class="pollSortByRandom selected" data-sort-id="1" title="Sort by most recent">Random</a></li>
-		<li><a href="#" class="pollSortByRecent" data-sort-id="2" title="Sort randomly">Recent</a></li>
+		<li><a href="#" class="pollSortByRecent" data-sort-id="2" title="Sort randomly">Name</a></li>
 	</ul>
+
 	<div class="clear"></div>
 	<div class="pollSearchHeader">
 		<input type="text" id="pollSearch" placeholder="Search this region (e.g. artist, song)" />

@@ -1,4 +1,4 @@
-# client-side-search
+# client-side-search-boilerplate
 
 [NOT COMPLETE YET. COME BACK IN A DAY OR SO]
 
@@ -31,9 +31,22 @@ of DOM manipulation done.
 
 ### How to implement
 
-Load up the index.html file and see how it works, then edit the code and underscore templates. This is kind of a hands-on
-script. :)
+Load up the `index.html` file and see how it works, then edit the code and underscore templates. This is kind of a
+hands-on script. :)
+
+### Other notes
+- to make the script as conflict-free as possible, the JS is namespaced via an anonymous self-invoked function; the CSS
+ids and classes are all prefixed with *cs-search-*.
+- the CSS file is written so you can just drop it into your site. The custom page styles in `index.html` are just for the
+sake of the demo.
+- The search functionality is really pretty basic, but for small data sets is probably sufficient. It only searchs a-z, A-Z,
+and 0-9 characters. Everything else is ignored. There are no wildcards or anything special like that. (But if you add them,
+send along a pull request!)
 
 ### Demo
 
 [coming soon]
+
+
+- Ben Keen, code
+- Ahmed
