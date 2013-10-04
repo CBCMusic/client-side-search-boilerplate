@@ -1,19 +1,19 @@
-﻿(function() {
+﻿/**
+ * client-side-search-boilerplate
+ * See: https://github.com/CBCMusic/client-side-search-boilerplate
+ * @author Ben Keen
+ */
+(function() {
     "use strict";
 
     // DOM elements
-    var _resultsPanelId = "resultsPanel";
-    var _questionListSelector = ".votingFilter ul";    
-    var _pollSortById = "pollSortBy";
-    var _searchFieldId = "pollSearch";
-    var _paginationFieldId = "pollPagination";
-    var _prevNextFieldId = "pollPrevNextButtons";
-    var _loadingFieldId = "pollLoading";
-    var _pollTitle = "pollTitle";
-    var _pollPlayAllBtn = "pollPlayAllBtn";
-    var _pollNavigation = "pollNavigation";
-    var _resultsElement = null;
-    var _questionListElement = null;
+    var _resultsPanelId    = "#sbResultsPanel";
+    var _sortById          = "#sbSortBy";
+    var _searchFieldId     = "#sbSearch";
+    var _paginationFieldId = "#sbPagination";
+    var _prevNextFieldId   = "#sbPrevNextButtons";
+    //var _loadingFieldId    = "pollLoading";
+    var _pollNavigation    = "pollNavigation";
 
     // config settings
     var _numPerPage = 10;
@@ -26,7 +26,7 @@
     var _pollPaginationTemplate = null;
     var _pollPrevNextTemplate = null;
 
-    // set the underscore delimiters to {{ }} to prevent conflicts with the ASP
+    // set the underscore delimiters to <@ @> (this was done to prevent conflicts with ASP, but remove if you want)
     _.templateSettings = {
         interpolate: /\<\@\=(.+?)\@\>/gim,
         evaluate: /\<\@(.+?)\@\>/gim,
@@ -35,62 +35,35 @@
 
     // misc "global-ish" private vars
     var _data = {};
-    var _currentQuestionId = null;
     var _currPage = 1;
 
+
+	/**
+	 * Called on DOM ready. Sets up the search.
+	 * @private
+	 */
     var _init = function() {
-        
-        // init various the event handlers
-        _questionListElement = $$(_questionListSelector)[0];
 
-        // initialize the title + play all button href
-        var currItem = _questionListElement.down("a.selected");
-        $(_pollTitle).innerHTML = currItem.innerHTML;
-        var searchParams = _getSearchParams();
-        _currentQuestionId = searchParams.PollQuestionId;
-        $(_pollPlayAllBtn).down("a").writeAttribute("href", "/playlists/pollquestion/" + _currentQuestionId);
-
-        _questionListElement.on("click", "a", _onSelectNewQuestion);
-        $(_pollSortById).on("click", "a", _onChangeSort);
+        $(_sortById).on("click", "a", _onChangeSort);
         $(_paginationFieldId).on("click", "a", _onClickPagination);
         $(_prevNextFieldId).on("click", "a", _onClickPrevNext);
         $(_searchFieldId).on("keyup", _search);
 
-        _resultsElement = $(_resultsPanelId);
-
         // store the templates
-        _pollNoResultsTemplate = _.template($("pollNoResultsTemplate").innerHTML);
-        _pollHasResultsTemplate = _.template($("pollHasResultsTemplate").innerHTML);
-        _pollResultRowTemplate = _.template($("pollResultRowTemplate").innerHTML);
-        _pollPaginationTemplate = _.template($("pollPaginationTemplate").innerHTML);
-        _pollPrevNextTemplate = _.template($("pollPrevNextTemplate").innerHTML);
+        _pollNoResultsTemplate  = _.template($("#pollNoResultsTemplate").html());
+        _pollHasResultsTemplate = _.template($("#pollHasResultsTemplate").html());
+        _pollResultRowTemplate  = _.template($("#pollResultRowTemplate").html());
+        _pollPaginationTemplate = _.template($("#pollPaginationTemplate").html());
+        _pollPrevNextTemplate   = _.template($("#pollPrevNextTemplate").html());
 
         _search();
     };
 
     var _getSearchParams = function () {
         return {
-            PollQuestionId: _extractQuestionId(_questionListElement.down("a.selected").readAttribute("href")),
-            SearchOrder: 1, // always search by most recent. We'll handle randomization on the client
-            SearchTerm: $(_searchFieldId).value,
-            Size: 1000
+			searchStr: $(_searchFieldId).val(),
+            sortBy: $(_searchFieldId).value // TODO
         };
-    };
-
-    var _onSelectNewQuestion = function(e, el) {
-        Event.stop(e);
-
-        // select the new item and de-select the old
-        var currItem = _questionListElement.down("a.selected");
-        currItem.removeClassName("selected");
-        $(el).addClassName("selected");
-        $(_pollTitle).innerHTML = el.innerHTML;
-        
-        // update the playlist Play All href
-        $(_pollPlayAllBtn).down("a").writeAttribute("href", "/playlists/pollquestion/" + _currentQuestionId);
-
-        // do a fresh search
-        _search();
     };
 
     var _onChangeSort = function(e, el) {
@@ -338,14 +311,8 @@
     };
     
 
-    // poor, but needed for compatibility with old code
-    var _extractQuestionId = function (str) {
-        var parts = str.split("#");
-        return parts[1].replace(/^q/, "");
-    };
 
-
-    // initialize the sucker!
-    document.observe("dom:loaded", _init);
+    // initialize the sucker! (this is shorthand for "on DOM-ready, execute _init function")
+    $(_init);
 
 })();

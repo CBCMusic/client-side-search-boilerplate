@@ -1,33 +1,51 @@
 <!doctype html>
 <html>
 <head>
-	<title>client-side-search</title>
+	<title>client-side-search-boilerplate</title>
 	<script type="text/javascript" src="libs/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="libs/underscore.min.js"></script>
 	<script type="text/javascript" src="libs/search.js"></script>
+	<script type="text/javascript" src="example-data.js"></script>
 
 	<link href="css/search.css" media="all" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+	/* custom styles for this demo page */
+	body {
+		font-family: "lucida grande", verdana;
+		font-size: 10pt;
+	}
+	</style>
 </head>
 <body>
 
-	<h1>client-side-search demo</h1>
+	<h1>client-side-search-boilerplate demo</h1>
 
-	<ul id="cssbSort">
-		<li><a href="#" class="pollSortByRandom selected" data-sort-id="1" title="Sort by most recent">Random</a></li>
-		<li><a href="#" class="pollSortByRecent" data-sort-id="2" title="Sort randomly">Name</a></li>
-	</ul>
+	<p>
+		This is a demo of the <b>client-side-search-boilerplate</b>, found on
+		<a href="https://github.com/CBCMusic/client-side-search-boilerplate">github here</a>. The data is pulled
+		from example-data.js.
+	</p>
+
+	<section class="sbSortSection">
+		<h4>Sort</h4>
+		<ul id="sbSortBy">
+			<li><a href="#" class="selected" data-sort-attr="[RANDOM]" title="Sort randomly">Random</a></li>
+			<li><a href="#" data-sort-attr="name">Name</a></li>
+			<li><a href="#" data-sort-attr="phone">Phone</a></li>
+			<li><a href="#" data-sort-attr="dob">Date of Birth</a></li>
+		</ul>
+	</section>
 
 	<div class="clear"></div>
-	<div class="pollSearchHeader">
-		<input type="text" id="pollSearch" placeholder="Search this region (e.g. artist, song)" />
-		<span id="pollPlayAllBtn"><a class="playButton" href="" title="Play all"></a></span>
+	<div class="sbSearchBar">
+		<input type="text" id="sbSearch" placeholder="Search" />
 	</div>
-	<div id="pollNavigation" class="pollNavigation">
-		<div class="pages" id="pollPagination"></div>
-		<div class="prevNextButtons" id="pollPrevNextButtons"></div>
-		<div class="clear"></div>
+	<div id="sbNavigation" class="sbNavigation">
+		<div class="sbPages" id="sbPagination"></div>
+		<div class="sbPrevNextButtons" id="sbPrevNextButtons"></div>
+		<div class="sbClear"></div>
 	</div>
-	<div id="resultsPanel"></div>
+	<div id="sbResultsPanel"></div>
 
 
 	<!-- start underscore templates -->

@@ -1,4 +1,4 @@
-﻿.pollSearchHeader {
+﻿.sbSearchBar {
     background: #00a9ea;
     background: -moz-linear-gradient(top,  #00a9ea 0%, #0099d7 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00a9ea), color-stop(100%,#0099d7));
@@ -17,29 +17,15 @@
     border-bottom: 1px solid #0078a7;
     width: 438px;
 }
-.pollSearchHeader input {
+.sbSearchBar input {
     line-height: 33px;    
     height: 33px;
-    width: 350px;
+    width: 426px;
     font-size: 12pt;
     padding-left: 6px;
 }
-#pollSortBy {
+#sbSortBy {
     float: right;
-}
-#pollSortBy li {
-    text-indent: -9999px;
-    width: 26px;
-    height: 20px;    
-    float: left;
-}
-#pollSortBy li:first-child {
-    width: 30px;
-}
-#pollSortBy li a {
-    background: url(../images/searchSprite.png);
-    display: block;
-    height: 20px;
 }
 #pollSortBy li a.pollSortByRecent {
     background-position: 0px -30px;
@@ -59,18 +45,6 @@
 }
 #pollSortBy li a.pollSortByRandom:hover {
     background-position: 0px -60px;
-}
-#pollPlayAllBtn {
-    float: right;
-    background: url(../images/searchSprite.png);
-    background-position: 0px -120px;
-    width: 66px;
-    height: 40px;
-}
-body #pollPlayAllBtn a {
-    display: block;
-    cursor: pointer;
-    background-image: none;
 }
 .votingContent {
     width: 450px;
@@ -114,15 +88,6 @@ body #pollPlayAllBtn a {
 .votingItems .item .voteButton:hover {
     background-color: #019700;
 }
-/* visible by default */
-.pollLoading {
-    display: block;
-    float: left;
-    width: 16px;
-    height: 16px;
-    background-image: url(../images/loading.gif);
-    margin: 2px 0px 0px 10px;
-}
 
 /* temporary, until voting is opened */
 .voteSelect {
@@ -132,4 +97,8 @@ body #pollPlayAllBtn a {
     background-color: #d8d8d8;
     border-bottom: 1px solid #cccccc;
     padding: 4px 8px;
+}
+
+.sbClear {
+	clear: both;
 }

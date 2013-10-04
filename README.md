@@ -13,13 +13,12 @@ searching, pagination and so forth into the javascript. This makes for a far bet
 this very task maybe a dozen times over my career, and always end up writing the same code again and again. No more!
 
 ### Features
-
-- search field
 - lets you search an array of objects, where the objects are of any structure. You specify which object keys should
 be included in the search
 - automatic pagination (1 2 3 ...) generated,
 - prev-next links
 - sorting options (example: random and by specific object key)
+- no images; all CSS is customizable so you can make it look however you want.
 
 ### Dependencies
 
@@ -29,12 +28,12 @@ of DOM manipulation done.
 
 ### How to implement
 
-Load up the `index.html` file and see how it works, then edit the code and underscore templates. This is kind of a
-hands-on script. :)
+Load up the `index.html` file and see how it works, then edit the code and underscore templates. You'll almost certainly
+want to customize the CSS to make it fit into your site. This is kind of a hands-on script. :)
 
 ### Other notes
-- to make the script as conflict-free as possible, the JS is namespaced via an anonymous self-invoked function; the CSS
-ids and classes are all prefixed with *cs-search-*.
+- to make the script as conflict-free as possible, the JS is namespaced via an anonymous self-invoked function; JS ids
+and classes are prefixed with `sb`; the CSS ids and classes are all prefixed with *sb-*.
 - the CSS file is written so you can just drop it into your site. The custom page styles in `index.html` are just for the
 sake of the demo.
 - The search functionality is really pretty basic, but for small data sets is probably sufficient. It only searchs a-z, A-Z,
