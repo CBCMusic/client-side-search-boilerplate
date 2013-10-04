@@ -1,7 +1,5 @@
 # client-side-search-boilerplate
 
-[NOT COMPLETE YET. COME BACK IN A DAY OR SO]
-
 This repo is a simple JS library and example implementation for searching an array of objects (any structure), and for
 providing common UI elements around the search: *pagination*, *prev/next links* and *sorting*. It's really just a
 boilerplate ready for customization: you'll need to tweak it to pass in the appropriate data, customize the markup
@@ -25,7 +23,7 @@ be included in the search
 
 ### Dependencies
 
-Underscore and jQuery. Underscore is used purely for _.template(), so it's easy to switch out if you had a
+Underscore and jQuery. Underscore is used purely for `_.template()`, so it's easy to switch out if you had a
 different client-side templating language in mind. jQuery is used because, hey, it's frickin' handy and there's a fair bit
 of DOM manipulation done.
 
@@ -40,13 +38,12 @@ ids and classes are all prefixed with *cs-search-*.
 - the CSS file is written so you can just drop it into your site. The custom page styles in `index.html` are just for the
 sake of the demo.
 - The search functionality is really pretty basic, but for small data sets is probably sufficient. It only searchs a-z, A-Z,
-and 0-9 characters. Everything else is ignored. There are no wildcards or anything special like that. (But if you add them,
-send along a pull request!)
+and 0-9 characters. Everything else is ignored. There are no wildcards or anything special like that (but if you add them,
+send along a pull request - it'd be a nice addition).
 
 ### Demo
 
 [coming soon]
 
-
+- Ahmed Khalil, design
 - Ben Keen, code
-- Ahmed
