@@ -64,7 +64,7 @@ send along a pull request - it'd be a nice addition).
 
 ### Demo
 
-See: (http://cbcmusic.github.io/client-side-search-boilerplate/)[http://cbcmusic.github.io/client-side-search-boilerplate/]
+See: [http://cbcmusic.github.io/client-side-search-boilerplate/](http://cbcmusic.github.io/client-side-search-boilerplate/)
 
 - Ahmed Khalil, original design
 - Ben Keen, code
