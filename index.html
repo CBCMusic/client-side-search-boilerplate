@@ -1,42 +1,127 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Client-side-search-boilerplate by CBCMusic</title>
+<head>
+	<title>client-side-search-boilerplate</title>
+	<script type="text/javascript" src="libs/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="libs/underscore.min.js"></script>
+	<script type="text/javascript" src="libs/search.js"></script>
+	<script type="text/javascript" src="demo-data.js"></script>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Client-side-search-boilerplate</h1>
-        <p>A boilerplate JS lib for searching an array of objects (any structure), and providing common UI elements like the search box, pagination and prev-next links. Uses underscore and jQuery.</p>
+	<link href="css/search.css" media="all" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+			/* custom styles for this demo page */
+		body {
+			font-family: "lucida grande", verdana;
+			font-size: 10pt;
+			background-color: #efefef;
+			padding: 0px;
+			margin: 0px;
+		}
+		body>section {
+			width: 800px;
+			padding: 20px;
+			margin: 0px auto;
+			background-color: #ffffff;
+		}
+		section h1 {
+			font-size: 23pt;
+			margin: 5px 0px 20px;
+		}
+		.col1 {
+			float: left;
+			width: 100px;
+		}
+		.col2 {
+			float: left;
+			width: 150px;
+		}
+	</style>
+</head>
+<body>
 
-        <p class="view"><a href="https://github.com/CBCMusic/client-side-search-boilerplate">View the Project on GitHub <small>CBCMusic/client-side-search-boilerplate</small></a></p>
+<section>
+	<h1>client-side-search-boilerplate demo</h1>
+
+	<p>
+		This is a demo of the <b>client-side-search-boilerplate</b>, found on
+		<a href="https://github.com/CBCMusic/client-side-search-boilerplate">github here</a>. The data is pulled
+		from example-data.js.
+	</p>
+
+	<hr size="1" />
+	<br />
+
+	<section class="sbSearch">
+		<div class="sbSearchBar">
+			<input type="text" id="sbSearchField" placeholder="Search" />
+		</div>
+		<div id="sbNavigation" class="sbNavigation">
+			<div class="sbPages" id="sbPagination"></div>
+			<div class="sbPrevNextButtons" id="sbPrevNextButtons"></div>
+			<div class="sbClear"></div>
+		</div>
+		<div id="sbResultsPanel"></div>
+	</section>
+
+	<section class="sbSortSection">
+		<h4>Sort</h4>
+		<ul id="sbSortBy">
+			<li><a href="#" data-sort-attr="[RANDOM]" title="Sort randomly">Random</a></li>
+			<li><a href="#" data-sort-attr="name">Name</a></li>
+			<li><a href="#" data-sort-attr="phone">Phone</a></li>
+			<li><a href="#" data-sort-attr="dob">Date of Birth</a></li>
+		</ul>
+	</section>
+
+	<div class="sbClear"></div>
+</section>
 
 
-        <ul>
-          <li><a href="https://github.com/CBCMusic/client-side-search-boilerplate/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/CBCMusic/client-side-search-boilerplate/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/CBCMusic/client-side-search-boilerplate">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>
-<a name="tmp" class="anchor" href="#tmp"><span class="octicon octicon-link"></span></a>Tmp.</h3>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/CBCMusic">CBCMusic</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+<!-- start underscore templates -->
+<script id="sbNoResultsTemplate" type="text/template">
+	<p class="sbMessage">Sorry, there are no results with that search criteria.</p>
+</script>
+
+<script id="sbHasResultsTemplate" type="text/template">
+	<ul class="sbItems"><@=rows@></ul>
+</script>
+
+<script id="sbResultRowTemplate" type="text/template">
+	<@ _.each(results, function(row) { @>
+	<li>
+		<span class="col1"><@=row.name@></span>
+		<span class="col2"><@=row.phone@></span>
+		<span class="col3"><@=row.dob@></span>
+	</li>
+	<@ }); @>
+</script>
+
+<script id="sbPaginationTemplate" type="text/template">
+	<@ _.each(pages, function(pageNum) { @>
+	<@ if (pageNum == currPage) { @>
+	<span><@=pageNum@></span>
+	<@ } else { @>
+	<a href="#" title="page <@=pageNum@>"><@=pageNum@></a>
+	<@ } @>
+	<@ }); @>
+	<@ if (showMorePages) { @><span>...</span><@ } @>
+</script>
+
+<script id="sbPrevNextTemplate" type="text/template">
+	<@ if (showPrevLink) { @>
+	<a href="#" class="pollPagePrev" title="Previous page">prev</a>
+	<@ } else { @>
+	<span>prev</span>
+	<@ } @>
+	<span>|</span>
+	<@ if (showNextLink) { @>
+	<a href="#" class="pollPageNext" title="Next page">next</a>
+	<@ } else { @>
+	<span>next</span>
+	<@ } @>
+</script>
+<!-- end templates -->
+
+
+</body>
 </html>
