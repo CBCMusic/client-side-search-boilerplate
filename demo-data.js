@@ -1,5 +1,5 @@
 // generated from generatedata.com
-var data = [
+var dataSource = [
 	{"name": "Micah", "email": "malesuada.ut@egetlacusMauris.org", "phone": "1-329-708-2923", "dob": "February 21st, 1997"},
 	{"name": "Burton", "email": "nisl.sem@ante.net", "phone": "1-191-535-5052", "dob": "October 5th, 1972"},
 	{"name": "Logan", "email": "et.ultrices.posuere@egetodioAliquam.org", "phone": "1-111-294-1172", "dob": "March 29th, 1972"},

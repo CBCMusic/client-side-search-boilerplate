@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="libs/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="libs/underscore.min.js"></script>
 	<script type="text/javascript" src="libs/search.js"></script>
-	<script type="text/javascript" src="example-data.js"></script>
+	<script type="text/javascript" src="demo-data.js"></script>
 
 	<link href="css/search.css" media="all" rel="stylesheet" type="text/css" />
 	<style type="text/css">
@@ -13,100 +13,111 @@
 	body {
 		font-family: "lucida grande", verdana;
 		font-size: 10pt;
+		background-color: #efefef;
+		padding: 0px;
+		margin: 0px;
+	}
+	body>section {
+		width: 800px;
+		padding: 20px;
+		margin: 0px auto;
+		background-color: #ffffff;
+	}
+	section h1 {
+		font-size: 23pt;
+		margin: 5px 0px 20px;
+	}
+	.col1 {
+		float: left;
+		width: 100px;
+	}
+	.col2 {
+		float: left;
+		width: 150px;
 	}
 	</style>
 </head>
 <body>
 
-	<h1>client-side-search-boilerplate demo</h1>
+	<section>
+		<h1>client-side-search-boilerplate demo</h1>
 
-	<p>
-		This is a demo of the <b>client-side-search-boilerplate</b>, found on
-		<a href="https://github.com/CBCMusic/client-side-search-boilerplate">github here</a>. The data is pulled
-		from example-data.js.
-	</p>
+		<p>
+			This is a demo of the <b>client-side-search-boilerplate</b>, found on
+			<a href="https://github.com/CBCMusic/client-side-search-boilerplate">github here</a>. The data is pulled
+			from example-data.js.
+		</p>
 
-	<section class="sbSortSection">
-		<h4>Sort</h4>
-		<ul id="sbSortBy">
-			<li><a href="#" class="selected" data-sort-attr="[RANDOM]" title="Sort randomly">Random</a></li>
-			<li><a href="#" data-sort-attr="name">Name</a></li>
-			<li><a href="#" data-sort-attr="phone">Phone</a></li>
-			<li><a href="#" data-sort-attr="dob">Date of Birth</a></li>
-		</ul>
-	</section>
+		<hr size="1" />
+		<br />
 
-	<div class="clear"></div>
-	<div class="sbSearchBar">
-		<input type="text" id="sbSearch" placeholder="Search" />
-	</div>
-	<div id="sbNavigation" class="sbNavigation">
-		<div class="sbPages" id="sbPagination"></div>
-		<div class="sbPrevNextButtons" id="sbPrevNextButtons"></div>
+		<section class="sbSearch">
+			<div class="sbSearchBar">
+				<input type="text" id="sbSearchField" placeholder="Search" />
+			</div>
+			<div id="sbNavigation" class="sbNavigation">
+				<div class="sbPages" id="sbPagination"></div>
+				<div class="sbPrevNextButtons" id="sbPrevNextButtons"></div>
+				<div class="sbClear"></div>
+			</div>
+			<div id="sbResultsPanel"></div>
+		</section>
+
+		<section class="sbSortSection">
+			<h4>Sort</h4>
+			<ul id="sbSortBy">
+				<li><a href="#" data-sort-attr="[RANDOM]" title="Sort randomly">Random</a></li>
+				<li><a href="#" data-sort-attr="name">Name</a></li>
+				<li><a href="#" data-sort-attr="phone">Phone</a></li>
+				<li><a href="#" data-sort-attr="dob">Date of Birth</a></li>
+			</ul>
+		</section>
+
 		<div class="sbClear"></div>
-	</div>
-	<div id="sbResultsPanel"></div>
+	</section>
 
 
 	<!-- start underscore templates -->
-	<script id="pollNoResultsTemplate" type="text/template">
-		<p class="pollMessage">Sorry, there are no results with that search criteria.</p>
+	<script id="sbNoResultsTemplate" type="text/template">
+		<p class="sbMessage">Sorry, there are no results with that search criteria.</p>
 	</script>
 
-	<script id="pollHasResultsTemplate" type="text/template">
-		<ul class="votingItems gearsblock artistTrackPoll"><@=rows@></ul>
+	<script id="sbHasResultsTemplate" type="text/template">
+		<ul class="sbItems"><@=rows@></ul>
 	</script>
 
-	<script id="pollResultRowTemplate" type="text/template">
+	<script id="sbResultRowTemplate" type="text/template">
 		<@ _.each(results, function(row) { @>
-		<li class="item dynamicPlaySection dynamicShareSection">
-			<input type="hidden" class="questionItemId" value="<@=row.Id@>" />
-			<div class="left">
-				<div class="questionImg">
-					<span class="questionHeader"></span>
-					<img src="http://static.music.cbc.ca<@=row.BandImage@>" alt="<@=row.BandName@>" />
-					<img src="http://static.music.cbc.ca<@=row.BandImage@>" style="display:none" class="shareImage" />
-				</div>
-				<div class="questionText">
-					<@=row.Title@>
-					<span><a href="<@=row.BandPermalink@>"><@=row.BandName@></a></span>
-				</div>
-			</div>
-			<div class="right">
-				<div class="voteSelect">
-					<input type="radio" name="question_<@=row.PollQuestionId@>" value="<@=row.Id@>" />
-					<button class="voteButton" type="button">Vote</button>
-				</div>
-				<a class="playButton" href="<@=row.PlayPermalink@>" title="Play this track"><@=row.BandName@> - <@=row.Title@></a>
-				<a class="gearsButton noinfo" href="<@=row.PlayPermalink@>" title="share"><@=row.PlayPermalink@></a>
-			</div>
-			<div class="clear"></div>
+		<li>
+			<span class="col1"><@=row.name@></span>
+			<span class="col2"><@=row.phone@></span>
+			<span class="col3"><@=row.dob@></span>
 		</li>
 		<@ }); @>
 	</script>
 
-	<script id="pollPaginationTemplate" type="text/template">
+	<script id="sbPaginationTemplate" type="text/template">
 		<@ _.each(pages, function(pageNum) { @>
-		<@ if (pageNum == currPage) { @>
-		<span><@=pageNum@></span>
-		<@ } else { @>
-		<a href="#" title="page <@=pageNum@>"><@=pageNum@></a>
-		<@ } @>
+			<@ if (pageNum == currPage) { @>
+				<span><@=pageNum@></span>
+			<@ } else { @>
+				<a href="#" title="page <@=pageNum@>"><@=pageNum@></a>
+			<@ } @>
 		<@ }); @>
 		<@ if (showMorePages) { @><span>...</span><@ } @>
 	</script>
 
-	<script id="pollPrevNextTemplate" type="text/template">
+	<script id="sbPrevNextTemplate" type="text/template">
 		<@ if (showPrevLink) { @>
-		<a href="#" class="pollPagePrev" title="Previous page">prev</a>
+			<a href="#" class="pollPagePrev" title="Previous page">prev</a>
 		<@ } else { @>
-		<span>prev</span>
+			<span>prev</span>
 		<@ } @>
 		<span>|</span>
 		<@ if (showNextLink) { @>
-		<a href="#" class="pollPageNext" title="Next page">next</a>
+			<a href="#" class="pollPageNext" title="Next page">next</a>
 		<@ } else { @>
-		<span>next</span>
+			<span>next</span>
 		<@ } @>
 	</script>
 	<!-- end templates -->

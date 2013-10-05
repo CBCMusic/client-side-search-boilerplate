@@ -29,7 +29,28 @@ of DOM manipulation done.
 ### How to implement
 
 Load up the `index.html` file and see how it works, then edit the code and underscore templates. You'll almost certainly
-want to customize the CSS to make it fit into your site. This is kind of a hands-on script. :)
+want to customize the CSS to make it fit into your site. This is kind of a hands-on script. :) But here's a few more details.
+
+#### Settings
+If you check out the top of the `/libs/search.js` file, you'll see three settings:
+
+    // config settings
+    var _numPerPage = 10;
+    var _maxPaginationLinks = 15;
+	var _dataPropertiesToSearch = ["name", "phone", "dob"]; // needs to be customized based on the content of your data
+
+The last one MUST be customized. It specifies which properties in your array of objects you want the search to recognize.
+
+#### Customizing the visible sort options
+The sort options reflect your data set. In the demo, you'll see there's a `Random`, `Name`, `Phone` and `Date of Bird`
+sort option. These are mapped to properties in the `demo-data.js` file via the `data-sort-attr` attribute. You can
+see the sorting is very basic: it only sorts in a single direction, and it's not correct for the Date of Birth field. This
+is because it searches alphabetically, not according to date. To fix that, you could add a new property to the data array
+with (say) a unixtime version of the dates and search on that. Alternatively, you can always edit the JS to do a custom
+sort based on that field.
+
+`Random` is a special sort option. If that's included with a `data-sort-attr="[RANDOM]"` value, it will automatically
+randomize the results.
 
 ### Other notes
 - to make the script as conflict-free as possible, the JS is namespaced via an anonymous self-invoked function; JS ids
@@ -39,10 +60,44 @@ sake of the demo.
 - The search functionality is really pretty basic, but for small data sets is probably sufficient. It only searchs a-z, A-Z,
 and 0-9 characters. Everything else is ignored. There are no wildcards or anything special like that (but if you add them,
 send along a pull request - it'd be a nice addition).
+- The default search order is whatever order the results appear in the data source.
 
 ### Demo
 
-[coming soon]
+See: (http://cbcmusic.github.io/client-side-search-boilerplate/)[http://cbcmusic.github.io/client-side-search-boilerplate/]
 
-- Ahmed Khalil, design
+- Ahmed Khalil, original design
 - Ben Keen, code
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
