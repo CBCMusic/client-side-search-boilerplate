@@ -66,6 +66,11 @@ send along a pull request - it'd be a nice addition).
 
 See: [http://cbcmusic.github.io/client-side-search-boilerplate/](http://cbcmusic.github.io/client-side-search-boilerplate/)
 
+### License
+
+MIT.
+
+
 - Ahmed Khalil, original design
 - Ben Keen, code
 
