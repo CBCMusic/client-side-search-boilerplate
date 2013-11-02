@@ -7,10 +7,13 @@ so it displays whatever information you want. But the idea is that it can work w
 in an array of objects. Most likely you'd use an Ajax request to get the info to the client (we do).
 
 ### Why?
-
 Sometimes when you have a relatively small data set, you can dole the entire thing up to the client and move all
-searching, pagination and so forth into the javascript. This makes for a far better user experience. I've had to do
-this very task maybe a dozen times over my career, and always end up writing the same code again and again. No more!
+searching, pagination and so forth into the javascript. This makes for a far better user experience than having to 
+unnecessarily go to and from the server. I've had to do this very task maybe a dozen times over my career, and always 
+end up writing the same code again and again. No more!
+
+### Screenshot
+![Example](http://www.formtools.org/external/client-side-search.jpg "Example")
 
 ### Features
 - lets you search an array of objects, where the objects are of any structure. You specify which object keys should
@@ -21,13 +24,11 @@ be included in the search
 - no images; all CSS is customizable so you can make it look however you want.
 
 ### Dependencies
-
 Underscore and jQuery. Underscore is used purely for `_.template()`, so it's easy to switch out if you had a
-different client-side templating language in mind. jQuery is used because, hey, it's frickin' handy and there's a fair bit
+different client-side templating language in mind. jQuery is used because, hey, it's jQuery and there's a fair bit
 of DOM manipulation done.
 
 ### How to implement
-
 Load up the `index.html` file and see how it works, then edit the code and underscore templates. You'll almost certainly
 want to customize the CSS to make it fit into your site. This is kind of a hands-on script. :) But here's a few more details.
 
@@ -54,7 +55,7 @@ randomize the results.
 
 ### Other notes
 - to make the script as conflict-free as possible, the JS is namespaced via an anonymous self-invoked function; JS ids
-and classes are prefixed with `sb`; the CSS ids and classes are all prefixed with *sb-*.
+and classes are prefixed with `sb`; the CSS ids and classes are also all prefixed with `sb`.
 - the CSS file is written so you can just drop it into your site. The custom page styles in `index.html` are just for the
 sake of the demo.
 - The search functionality is really pretty basic, but for small data sets is probably sufficient. It only searchs a-z, A-Z,
@@ -63,13 +64,10 @@ send along a pull request - it'd be a nice addition).
 - The default search order is whatever order the results appear in the data source.
 
 ### Demo
-
 See: [http://cbcmusic.github.io/client-side-search-boilerplate/](http://cbcmusic.github.io/client-side-search-boilerplate/)
 
 ### License
-
 MIT.
-
 
 - Ahmed Khalil, original design
 - Ben Keen, code
