@@ -43,7 +43,7 @@ If you check out the top of the `/libs/search.js` file, you'll see three setting
 The last one MUST be customized. It specifies which properties in your array of objects you want the search to recognize.
 
 #### Customizing the visible sort options
-The sort options reflect your data set. In the demo, you'll see there's a `Random`, `Name`, `Phone` and `Date of Bird`
+The sort options reflect your data set. In the demo, you'll see there's a `Random`, `Name`, `Phone` and `Date of Birth`
 sort option. These are mapped to properties in the `demo-data.js` file via the `data-sort-attr` attribute. You can
 see the sorting is very basic: it only sorts in a single direction, and it's not correct for the Date of Birth field. This
 is because it searches alphabetically, not according to date. To fix that, you could add a new property to the data array
@@ -54,8 +54,8 @@ sort based on that field.
 randomize the results.
 
 ### Other notes
-- to make the script as conflict-free as possible, the JS is namespaced via an anonymous self-invoked function; JS ids
-and classes are prefixed with `sb`; the CSS ids and classes are also all prefixed with `sb`.
+- to make the script as conflict-free as possible, the JS is namespaced via a self-invoked anonymoys function; JS ids
+and classes are prefixed with `sb`; CSS ids and classes are also prefixed with `sb`.
 - the CSS file is written so you can just drop it into your site. The custom page styles in `index.html` are just for the
 sake of the demo.
 - The search functionality is really pretty basic, but for small data sets is probably sufficient. It only searchs a-z, A-Z,
